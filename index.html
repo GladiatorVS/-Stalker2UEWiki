@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>STALKER-UE5</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <!--    <link href="assets/img/favicon.png" rel="icon">-->
+    <!--    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">-->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header id="header" data-bs-theme="dark" class="header fixed-top d-flex align-items-center ">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+            <span class="d-none d-lg-block">S.T.A.L.K.E.R. UE5</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+</header><!-- End Header -->
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-bs-target="#components-nav">
+                <i class="bi bi-journal-text"></i><span>Документация</span><i class="bi  ms-auto"></i>
+            </a>
+            <ul id="components-nav" class="nav-content  " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="#bld">
+                        <i class="bi bi-circle"></i><span>Сборка исходного кода</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#conf">
+                        <i class="bi bi-circle"></i><span>Соответствия конфигураций решений</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#cng">
+                        <i class="bi bi-circle"></i><span>Смена игры в Unreal Engine</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#res">
+                        <i class="bi bi-circle"></i><span>Импорт контента из gamedata/rawdata</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#wobj">
+                        <i class="bi bi-circle"></i><span>Как работать с WayObject</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#ai">
+                        <i class="bi bi-circle"></i><span>Как работать с AI Map</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#spw">
+                        <i class="bi bi-circle"></i><span>Как работать с SpawnObject</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#cfr">
+                        <i class="bi bi-circle"></i><span>Примечания по CForm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#xse">
+                        <i class="bi bi-circle"></i><span>Перезагрузка XrGame & XrSE_Factory</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#lvl">
+                        <i class="bi bi-circle"></i><span>Пример создания простого уровня</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+    </ul>
+
+</aside><!-- End Sidebar-->
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Documentation</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <!--        <div class="row">-->
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+            <div class="row">
+
+                <div id="bld">
+                    <div class="card recent-sales overflow-auto">
+                        <div class="card-body">
+                            <h5 class="card-title">Сборка исходного кода</h5>
+                            <h4>1. Клонируем проект рекурсивно</h4>
+                            <div class="card p-2 m-2">
+                                <samp>git clone https://github.com/RedPandaProjects/Stalker2UE --recursive</samp>
+                            </div>
+                            <img src="assets/img/image1.png" class="img-fluid rounded mx-auto d-block" alt="...">
+                            <h4 class="mt-5">2. Сборка X-Ray Engine</h4>
+                            <p>X-Ray находится по данному пути:</p>
+                            <div class="card p-2 m-2">
+                                <samp>{Папка с репозиторием}/Source/XRayEngine/Source/Engine.sln</samp>
+                            </div>
+
+                            <p>Данный проект нужно открыть и скомпилировать с нужной конфигурацией. <br><a href="#conf">(Таблица
+                                соответствий конфигураций UnrealEngine с XRayEngine)</a></p>
+                            <h4 class="mt-5">2.1. Пример сборки</h4>
+                            <p>Сборка "DebugGame Editor" в проекте Unreal<br>Для этого мне нужно собрать все решение с
+                                конфигурацией Debug. Все как в той таблицы иначе не запуститься!</p>
+                            <img src="assets/img/image2.png" class="img-fluid rounded mx-auto d-block" alt="...">
+
+                            <h4 class="mt-5">3. После сборки X-Ray Engine</h4>
+                            <p>После успешной сборки X-Ray Engine, следует вернуться в корневую папку репозитория, и
+                                сгенерировать проект.</p>
+                            <p>Примечания.<br>* Если нет пунктов "Generate Visual Studio project files", можно исправить
+                                по этому <a href="https://youtu.be/MZu5EB2UfiA">видео</a>.<br>
+                                * Перед генерацией проекта, в избежании ошибок при компиляции, нужно оставить только
+                                последнюю версию MSVC в Visual Studio Installer
+                            </p>
+                            <img src="assets/img/image3.png" class="img-fluid rounded mx-auto d-block" alt="...">
+                            <h4 class="mt-5">3.1. Компиляция файлов для запуска проекта Unreal Engine</h4>
+                            <p>После генерации проекта Visual Studio, нужно открыть его и выбрал нужную конфигурацию
+                                собрать.</p>
+                            <p>Примечания.<br>* После сборки возможно запустить редактор, но вы не сможете играть пока
+                                не поставите полный контент.<br>
+                                * Актуальную сборку контента для последнего билда вы можете найти в <a
+                                        href="https://discord.gg/Nfz57CjXuD">дискоде</a>, в канале <a
+                                        href="https://discordapp.com/channels/530968529311367178/1085389969675268196">#last-build</a>
+                            </p>
+                            <img src="assets/img/image4.png" class="img-fluid rounded mx-auto d-block" alt="...">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="conf">
+                    <div class="card top-selling overflow-auto">
+                        <div class="card-body pb-0">
+                            <h5 class="card-title">Соответствия конфигураций решений</h5>
+
+                            <table class="table ">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Unreal Engine 5</th>
+                                    <th scope="col">X-RAY Engine</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="table-warning">
+                                    <td><span>Debug</span></td>
+                                    <td><span>Debug</span></td>
+                                </tr>
+                                <tr class="table-warning">
+                                    <td><span>Debug Client</span></td>
+                                    <td><span>Debug</span></td>
+                                </tr>
+                                <tr class="table-warning">
+                                    <td><span>Debug Editor</span></td>
+                                    <td><span>Debug</span></td>
+                                </tr>
+                                <tr class="table-warning">
+                                    <td><span>Debug Server</span></td>
+                                    <td><span>Debug</span></td>
+                                </tr>
+                                <tr class="table-warning">
+                                    <td><span>DebugGame</span></td>
+                                    <td><span>Debug</span></td>
+                                </tr>
+                                <tr class="table-warning">
+                                    <td><span>DebugGame Client</span></td>
+                                    <td><span>Debug</span></td>
+                                </tr>
+                                <tr class="table-warning">
+                                    <td><span>DebugGame Editor</span></td>
+                                    <td><span>Debug</span></td>
+                                </tr>
+                                <tr class="table-warning">
+                                    <td><span>DebugGame Server</span></td>
+                                    <td><span>Debug</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr class="table-success">
+                                    <td><span>Development</span></td>
+                                    <td><span>Release</span></td>
+                                </tr>
+                                <tr class="table-success">
+                                    <td><span>Development Client</span></td>
+                                    <td><span>Release</span></td>
+                                </tr>
+                                <tr class="table-success">
+                                    <td><span>Development Editor</span></td>
+                                    <td><span>Release</span></td>
+                                </tr>
+                                <tr class="table-success">
+                                    <td><span>Development Server</span></td>
+                                    <td><span>Release</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr class="table-info">
+                                    <td><span>Shipping</span></td>
+                                    <td><span>Shipping</span></td>
+                                </tr>
+                                <tr class="table-info">
+                                    <td><span>Shipping Client</span></td>
+                                    <td><span>Shipping</span></td>
+                                </tr>
+                                <tr class="table-info">
+                                    <td><span>Shipping Server</span></td>
+                                    <td><span>Shipping</span></td>
+                                </tr>
+                                <tr class="table-info">
+                                    <td><span>Test</span></td>
+                                    <td><span>Shipping</span></td>
+                                </tr>
+                                <tr class="table-info">
+                                    <td><span>Test Client</span></td>
+                                    <td><span>Shipping</span></td>
+                                </tr>
+                                <tr class="table-info">
+                                    <td><span>Test Server</span></td>
+                                    <td><span>Shipping</span></td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12" id="cng">
+                    <div class="card recent-sales overflow-auto">
+                        <div class="card-body">
+                            <h5 class="card-title">Смена игры в Unreal Engine</h5>
+                            <div class="bd-content ps-lg-4">
+                                <h4>1. Подготовка</h4>
+                                <p>Для начала убедитесь, что у вас не загружен уровень со спавном, иначе это может
+                                    привезти к вылету.<br>Также желательно создать пустой уровень.</p>
+
+                                <img src="assets/img/image5.png" class="img-fluid rounded mx-auto d-block" alt="...">
+                                <h4 class="mt-5">2. Смена игры и перезагрузка XrGame</h4>
+                                <p>Выбираем нужную игру и ждём пока перезагрузится нужный XrGame</p>
+                                <p>Примечание.<br>* Спавн автоматически обновляется после смены игры.
+                                </p>
+                                <img src="assets/img/image6.png" class="img-fluid rounded mx-auto d-block" alt="...">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="res">
+
+                        <div class="card recent-sales overflow-auto">
+                            <div class="card-body">
+                                <h5 class="card-title">Импорт контента из gamedata/rawdata</h5>
+                                <div class="bd-content ps-lg-4">
+                                    <div class="alert alert-info" role="alert">
+                                        Вам необязательно самому импортировать контент для запуска! Актуальную сборку
+                                        контента для последнего билда вы можете найти в <a
+                                            href="https://discord.gg/Nfz57CjXuD">дискоде</a>, в канале <a
+                                            href="https://discordapp.com/channels/530968529311367178/1085389969675268196">#last-build</a>
+                                    </div>
+                                    <h4>1. Подготовка ресурсов</h4>
+                                    <p>Если вы решили импортировать контент из gamedata, то вам сначала надо поставить
+                                        полную версию gamedata и rawdata в корневую папку проекта</p>
+                                    <table class="table ">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Игра</th>
+                                            <th scope="col">Название gamedata</th>
+                                            <th scope="col">Название rawdata</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="table-warning">
+                                            <td><span>S.T.A.L.K.E.R.: Shadow of Chernobyl</span></td>
+                                            <td><span>gamedata_soc</span></td>
+                                            <td><span>rawdata_soc</span></td>
+                                        </tr>
+                                        <tr class="table-warning">
+                                            <td><span>S.T.A.L.K.E.R.: Clear Sky</span></td>
+                                            <td><span>gamedata_cs</span></td>
+                                            <td><span>rawdata_cs</span></td>
+                                        </tr>
+                                        <tr class="table-warning">
+                                            <td><span>S.T.A.L.K.E.R.: Call of Pripyat</span></td>
+                                            <td><span>gamedata</span></td>
+                                            <td><span>rawdata</span></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <p>Таблица с названием папок, куда следует поместить ресурсы в зависимости от нужной
+                                        игры.</p>
+                                    <p>Примечание.<br>* Изначально папки gamedata для всех трёх частей есть в git'е, но
+                                        в них только скрипты и конфиги ИХ УДАЛЯТЬ ИЛИ ЗАМЕНЯТЬ НЕЛЬЗЯ</p>
+                                    <img src="assets/img/image7.png" class="img-fluid rounded mx-auto d-block"
+                                         alt="...">
+                                    <h4 class="mt-5">2. Импорт в Unreal Engine</h4>
+                                    <p>После того как вы поставили gamedata в редакторе вам надо сделать минимальный
+                                        импорт нужного контакта для запуска PIE(Play In Editor).</p>
+                                    <p>Для начало откройте меню "Stalker" </p>
+                                    <img src="assets/img/image8.png" class="img-fluid rounded mx-auto d-block"
+                                         alt="...">
+                                    <p><br>По очерёдности вызовете три команды импорта такие как "Import UI Textures",
+                                        "Import Physical Materials", "Import Meshes".<br>
+                                        После этого можно создать тестовую локу и запустить PIE
+                                    </p>
+
+                                    <p>Примечание.<br>* Проект позволяет импортировать следующие форматы в UE5:<br> -
+                                        dds(с сжатием)<br> - ogf<br> - object<br> - level(XRay SDK)<br> - gamemtl.xr
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div id="wobj">
+                            <div class="card recent-sales overflow-auto">
+                                <div class="card-body">
+                                    <h5 class="card-title">Как работать с WayObject</h5>
+                                    <div class="bd-content ps-lg-4">
+                                        <h4>1. WayObjects</h4>
+                                        <p>Для начало его нужно создать. Ищем в "Place Actors" Stalker Way Object.</p>
+                                        <img src="assets/img/image9.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>Далее нужно перейти в режим редактирования "Way Points Editor".</p>
+                                        <img src="assets/img/image10.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>Описания режима редактирования. Он полностью аналогичен оригинальному
+                                            редактору.</p>
+                                        <img src="assets/img/image11.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br><br>Пример работы.</p>
+                                        <div class="ratio ratio-16x9">
+                                            <video controls>
+                                                <source src="assets/vid/waypoint.mp4" type="video/mp4">
+                                            </video>
+                                        </div>
+                                        <h4 class="mt-5">2. Дополнительная информация</h4>
+                                        <p>Way Object'ы являются частью спавна, следовательно, при их редактирование
+                                            спавн устаревает и требует пересборку. <br>
+                                            Она также может быть автоматической или ручной все как вы настроите.<br>
+                                            Про то как работать со спавном прочтите <a href="#spw">"Как работать с Spawn
+                                                Object'ами"</a></p>
+                                        <p>Рендер Way points можно включить и выключить в "show"</p>
+                                        <img src="assets/img/image12.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="ai">
+                            <div class="card recent-sales overflow-auto">
+                                <div class="card-body">
+                                    <h5 class="card-title">Как работать с AI Map</h5>
+                                    <div class="bd-content ps-lg-4">
+                                        <h4>1. Создание</h4>
+                                        <p>Редактирования AIMap схоже с оригинальным редактором GSC<br>
+                                            Для начало надо выбрать режим редактирования AIMap в редакторе.</p>
+                                        <img src="assets/img/image13.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>Описания окна редактора AIMap.</p>
+                                        <img src="assets/img/image14.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br><br>Примечание.<br>* Генерация работает только в зоне
+                                            StalkerAIMapBoundsVolume:</p>
+                                        <img src="assets/img/image15.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>* Генерация не будет работать за зоной StalkerAIMapBoundsVolume. Также их
+                                            может быть несколько.</p>
+
+                                        <h4 class="mt-5">2. Пример работы с AIMap</h4>
+                                        <p>Генерация AIMap.</p>
+                                        <div class="ratio ratio-16x9">
+                                            <video controls>
+                                                <source src="assets/vid/ai.mp4" type="video/mp4">
+                                            </video>
+                                        </div>
+                                        <h4 class="mt-5">3. Дополнительная информация</h4>
+                                        <p>UnrealEditor автоматически помечает что AI стека требует пересборку</p>
+                                        <img src="assets/img/image16.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>Сборка может быть автоматический при необходимости перед запуском
+                                            PIE(Play In Editor) </p>
+                                        <img src="assets/img/image17.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>Рендер AIMap можно включить и без режима редактирования AIMap в меню
+                                            "show"</p>
+                                        <img src="assets/img/image18.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="spw">
+                            <div class="card recent-sales overflow-auto">
+                                <div class="card-body">
+                                    <h5 class="card-title">Как работать с SpawnObject</h5>
+                                    <div class="bd-content ps-lg-4">
+                                        <h4>1. Создание</h4>
+                                        <p>Редактирования Spawn Objects схоже с оригинальным редактором GSC<br>
+                                            В "Place Actors" создан отдельный список объектов, он заполняется
+                                            автоматически как в оригинальном SDK GSC.</p>
+                                        <img src="assets/img/image19.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <!--                                                <hr>-->
+                                        <p><br>Они также работают через SE_Factory.</p>
+                                        <img src="assets/img/image20.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <!--                                                <hr>-->
+                                        <p><br>Свойства почти идентичны GSC свойствам спавна Shape (Box, Sphere).
+                                            Добавляются как компонент.</p>
+                                        <img src="assets/img/image21.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <!--                                                <hr>-->
+                                        <p><br>Пример заполнения Shapes SpawnObject.</p>
+                                        <img src="assets/img/image22.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <!--                                                <hr>-->
+                                        <p><br>Их отображение можно отключить.</p>
+                                        <img src="assets/img/image23.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <h4 class="mt-5">2. Сборка Spawn для игры</h4>
+                                        <p>Также UnrealEditor автоматически помечает, что LevelSpawn требует
+                                            пересборку.</p>
+                                        <img src="assets/img/image24.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>Сборка спавна как и у пыс делится на два типа:<br>
+                                            1. LevelSpawn - Спавн уровня (Спавн уровня можно собрать только на самом
+                                            уровне)<br>
+                                            2. GameSpawn - Спавн всей игры (Собирается из спавнов уровней как настроите)
+                                        </p>
+                                        <p>Она также может быть автоматической при необходимости для PIE(Play In
+                                            Editor).</p>
+                                        <img src="assets/img/image25.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <hr>
+                                        <p><br>Для PIE есть режимы сборки GameSpawn</p>
+                                        <img src="assets/img/image26.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>Настройка списка уровней которые используется для сборки GameSpawn
+                                            находится в настройках проекта. Для каждой игры свой список </p>
+                                        <img src="assets/img/image27.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>Тут настраивается ссылка на уровень также и "Include In Build Spawn"</p>
+                                        <img src="assets/img/image28.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>При отключенном "Include In Build Spawn" и в PIE "Ignore "Include In
+                                            Build Spawn"" уровень при автоматической сборке "Build full spawn" не будет
+                                            включен в список</p>
+                                        <p>Также сборку можно вызвать в ручную</p>
+                                        <img src="assets/img/image29.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <hr>
+                                        <p>Сборка GameSpawn из бара или меню будет собирать весь GameSpawn целиком с
+                                            игнорированием "Include In Build Spawn"(то есть все уровне которые есть в
+                                            списке для данной игры)</p>
+                                        <p>Как выглядит лог сборки LevelSpawn</p>
+                                        <img src="assets/img/image30.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p>Как выглядит лог сборки GameSpawn</p>
+                                        <img src="assets/img/image31.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>Для корректной сборки GameSpawn нужно чтобы все пункты были
+                                            выполнены:<br>
+                                            1. Хотя бы один GraphPoint на каждом уровне<br>
+                                            2. только один "actor" он single_player<br>
+                                            3. наличие у уровня собранного LevelSpawn,AIMap
+                                        </p>
+                                        <p><br><br>Собранный файл выглядит как в оригинале:</p>
+                                        <img src="assets/img/image32.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p>При ошибке при сборке спавна, подробная информация указывается в логе</p>
+                                        <img src="assets/img/image33.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="cfr">
+                            <div class="card recent-sales overflow-auto">
+                                <div class="card-body">
+                                    <h5 class="card-title">Примечания по CForm</h5>
+                                    <div class="bd-content ps-lg-4">
+                                        <img src="assets/img/image34.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>CForm -- это геометрия для коллизии и физики GSC</p>
+                                        <p>В отличие от AIMap или Spawn она не может проверяться на необходимость
+                                            пересборки</p>
+                                        <hr>
+                                        <p>Можно настроить её сборку автоматически перед началом PIE(Play In Editor)</p>
+                                        <img src="assets/img/image35.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <p><br>Также её можно собрать вручную</p>
+                                        <img src="assets/img/image36.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="xse">
+                            <div class="card recent-sales overflow-auto">
+                                <div class="card-body">
+                                    <h5 class="card-title">Перезагрузка XrGame и XrSE_Factory</h5>
+                                    <div class="bd-content ps-lg-4">
+                                        <p><br>Перезагрузка XrGame и XrSE_Factory делается одной кнопкой</p>
+                                        <img src="assets/img/image37.png" class="img-fluid rounded mx-auto d-block"
+                                             alt="...">
+                                        <hr>
+                                        <p>Если есть потребность перезагрузить, обновить список объектов или обновить
+                                            конфиги, то эта кнопка для вас.<br>
+                                            Она полностью перезагружает system.ltx, game.ltx<br><br>
+                                            Также перезагружает se_factory включая его скрипты.<br>
+                                            <b>У XrGame скрипты перезагружаются каждый запуск PIE!</b></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="lvl">
+                            <div class="card recent-sales overflow-auto">
+                                <div class="card-body">
+                                    <h5 class="card-title">Создание простого уровня</h5>
+                                    <div class="bd-content ps-lg-4">
+                                        <div class="ratio ratio-16x9">
+                                            <video controls>
+                                                <source src="assets/vid/level.mp4" type="video/mp4">
+                                            </video>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main><!-- End #main -->
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        <a href="https://github.com/RedPandaProjects/Stalker2UE">GitHub</a>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
